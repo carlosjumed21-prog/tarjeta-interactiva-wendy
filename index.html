@@ -14,72 +14,116 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #31102b 100%);
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 2rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fondo con partículas / corazones flotantes animados estilo TikTok */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -50px;
+            background: rgba(244, 63, 94, 0.25);
+            backdrop-filter: blur(2px);
+            border-radius: 50%;
+            animation: floatUp 8s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.6);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
         }
 
         .container {
             width: 100%;
-            max-width: 650px;
+            max-width: 680px;
+            position: relative;
+            z-index: 1;
         }
 
         h3 {
             text-align: center;
-            color: #f43f5e;
-            font-size: 1.8rem;
+            color: #fb7185;
+            font-size: 2rem;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+            animation: fadeInDown 0.8s ease-out;
         }
 
         .subtitle {
             text-align: center;
             color: #94a3b8;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease-out;
         }
 
-        /* Botones de navegación */
+        /* Menú de selección rápida */
         .nav-buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .nav-btn {
-            background: rgba(30, 41, 59, 0.9);
-            border: 1px solid rgba(244, 63, 94, 0.3);
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(244, 63, 94, 0.4);
             color: #f8fafc;
-            padding: 10px 5px;
-            border-radius: 12px;
+            padding: 12px 6px;
+            border-radius: 14px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             text-align: center;
+            backdrop-filter: blur(5px);
         }
 
-        .nav-btn:hover, .nav-btn.active {
+        .nav-btn:hover {
             background: #f43f5e;
             border-color: #f43f5e;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.5);
         }
 
-        /* Tarjeta principal */
+        /* Tarjeta principal estilo TikTok / Prezi */
         .tarjeta-romantica {
             background: rgba(30, 41, 59, 0.85);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 63, 94, 0.2);
-            border: 1px solid rgba(244, 63, 94, 0.3);
+            border-radius: 28px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(244, 63, 94, 0.2);
+            border: 1px solid rgba(244, 63, 94, 0.35);
             display: none;
-            animation: fadeInCard 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: zoomInCard 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .tarjeta-romantica.active {
@@ -87,89 +131,150 @@
         }
 
         .titulo-tarjeta {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: #fb7185;
             margin-bottom: 0.5rem;
             border-bottom: 2px solid rgba(244, 63, 94, 0.3);
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.75rem;
             text-align: center;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .card-subtitle {
-            color: #fb7185;
+            color: #fda4af;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
+            animation: fadeIn 0.7s ease-out;
         }
 
+        /* Bloques segmentados con aparición escalonada */
         .mensaje-segmento {
-            background: rgba(15, 23, 42, 0.6);
-            padding: 1.2rem 1.5rem;
-            border-radius: 16px;
-            margin-bottom: 1.2rem;
-            border-left: 5px solid #fb7185;
-            font-size: 1rem;
-            line-height: 1.7;
+            background: rgba(15, 23, 42, 0.65);
+            padding: 1.3rem 1.6rem;
+            border-radius: 18px;
+            margin-bottom: 1.25rem;
+            border-left: 6px solid #fb7185;
+            font-size: 1.05rem;
+            line-height: 1.8;
             color: #cbd5e1;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpBlock 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        /* Retrasos secuenciales para dar el efecto Prezi / fluido */
+        .tarjeta-romantica.active .mensaje-segmento:nth-child(3) { animation-delay: 0.15s; }
+        .tarjeta-romantica.active .mensaje-segmento:nth-child(4) { animation-delay: 0.3s; }
+        .tarjeta-romantica.active .mensaje-segmento:nth-child(5) { animation-delay: 0.45s; }
+        .tarjeta-romantica.active .mensaje-segmento:nth-child(6) { animation-delay: 0.6s; }
 
         .mensaje-segmento strong {
             color: #fff1f2;
+            font-size: 1.1rem;
         }
 
         .frase-cierre {
             font-style: italic;
             color: #fda4af;
             text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.95rem;
-            border-top: 1px dashed rgba(244, 63, 94, 0.3);
-            padding-top: 1rem;
+            margin-top: 2rem;
+            font-size: 1.05rem;
+            border-top: 1px dashed rgba(244, 63, 94, 0.4);
+            padding-top: 1.25rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.7s forwards;
+        }
+
+        .share-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #38bdf8;
+            word-break: break-all;
         }
 
         .home-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             text-align: center;
             margin-bottom: 10px;
+            animation: pulseIcon 2s infinite ease-in-out;
         }
 
-        @keyframes fadeInCard {
-            from { opacity: 0; transform: translateY(20px) scale(0.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        @media (max-width: 600px) {
+        @keyframes zoomInCard {
+            from { opacity: 0; transform: scale(0.93) translateY(25px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes slideUpBlock {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 650px) {
             .nav-buttons {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .titulo-tarjeta {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h3>✨ Dedicatorias de Rotación ✨</h3>
-        <p class="subtitle">Selecciona un destinatario para abrir su tarjeta:</p>
+    <!-- Fondo dinámico con partículas flotantes -->
+    <div class="particles" id="particles"></div>
 
-        <!-- Botones de Menú -->
-        <div class="nav-buttons">
+    <div class="container">
+        <h3 id="main-title">✨ Dedicatorias de Rotación ✨</h3>
+        <p class="subtitle" id="main-subtitle">Selecciona un destinatario para abrir su tarjeta personalizada:</p>
+
+        <!-- Botones de Menú Interactivo -->
+        <div class="nav-buttons" id="menu-buttons">
             <button class="nav-btn" onclick="mostrarTarjeta('elisa')">👩‍⚕️ Elisa</button>
             <button class="nav-btn" onclick="mostrarTarjeta('manuel')">🔬 Manuel</button>
             <button class="nav-btn" onclick="mostrarTarjeta('wendy')">💉 Wendy</button>
             <button class="nav-btn" onclick="mostrarTarjeta('bere')">📋 Bere</button>
         </div>
 
-        <!-- VISTA DE INICIO -->
+        <!-- VISTA DE INICIO / GENERAL -->
         <div id="inicio" class="tarjeta-romantica active" style="text-align: center;">
             <div class="home-icon">💖</div>
             <div class="titulo-tarjeta" style="border: none;">Agradecimientos con Estilo</div>
-            <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-top: 1rem;">
-                Un espacio interactivo diseñado con mucho cariño para reconocer el gran liderazgo, la guía y los aprendizajes que me llevé de cada uno de ustedes en esta etapa de especialidad.
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin-top: 1rem;">
+                Un espacio interactivo diseñado con mucho cariño para reconocer el gran liderazgo, la guía y los valiosos aprendizajes que me llevé de cada uno de ustedes en esta etapa de especialidad.
             </p>
-            <p style="color: #fb7185; margin-top: 20px; font-weight: 600;">Haz clic arriba en los botones para comenzar 👆</p>
+            <p style="color: #fb7185; margin-top: 25px; font-weight: 600;">Haz clic arriba en los botones para explorar las tarjetas 👆</p>
+            <div style="margin-top: 25px; font-size: 0.9rem; color: #94a3b8;">
+                💡 <em>Tip: Puedes compartir el enlace directo de cada tarjeta añadiendo <code>?p=nombre</code> en la barra de direcciones (ej. <code>?p=elisa</code>).</em>
+            </div>
         </div>
 
         <!-- TARJETA: DRA. ELISA -->
@@ -188,15 +293,25 @@
             </div>
 
             <div class="mensaje-segmento">
+                <strong>Empatía en la Práctica Diaria:</strong><br>
+                Me demostró que un buen líder sanitario equilibra el rigor analítico con una profunda sensibilidad social, escuchando y guiando al personal para construir entornos de trabajo sanos y productivos.
+            </div>
+
+            <div class="mensaje-segmento">
                 <strong>Modelo a Seguir:</strong><br>
-                Me llevo la lección de que anticiparse, educar y guiar con el ejemplo es la herramienta más poderosa que tenemos en nuestra disciplina. ¡Gracias por ser una mentora excepcional!
+                Me llevo la lección de que anticiparse, educar y guiar con el ejemplo es la herramienta más poderosa que tenemos en nuestra disciplina. ¡Gracias por ser una mentora excepcional y marcar mi formación!
             </div>
 
             <div class="frase-cierre">
                 "Liderar con visión humana y transformar los datos en bienestar comunitario."
             </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+
+            <div class="share-box">
+                🔗 Enlace directo para compartir: <span id="link-elisa"></span>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button>
             </div>
         </div>
 
@@ -216,15 +331,25 @@
             </div>
 
             <div class="mensaje-segmento">
-                <strong>Pensamiento Crítico:</strong><br>
-                Su exigencia y mentoría me enseñaron a no dar nada por sentado, a cuestionar la evidencia con bases firmes y a buscar siempre la excelencia técnica en cada análisis.
+                <strong>Entender el Porqué de las Cosas:</strong><br>
+                Su exigencia me enseñó a no dar nada por sentado, a desglosar cada problema complejo hasta encontrar su raíz y a justificar cada intervención con base en la evidencia más sólida y objetiva posible.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>Pensamiento Crítico y Legado:</strong><br>
+                Me llevo una perspectiva analítica renovada y un compromiso firme con la excelencia técnica. Gracias por moldear mi criterio clínico-epidemiológico con tanta paciencia y rigor.
             </div>
 
             <div class="frase-cierre">
                 "Entender el porqué de las cosas para hacer una vigilancia activa y con rigor científico."
             </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+
+            <div class="share-box">
+                🔗 Enlace directo para compartir: <span id="link-manuel"></span>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button>
             </div>
         </div>
 
@@ -244,6 +369,11 @@
             </div>
 
             <div class="mensaje-segmento">
+                <strong>Precisión y Vocación Operativa:</strong><br>
+                Aprendí que el éxito de una campaña de vacunación recae tanto en la planeación macro como en el detalle más fino del manejo operativo diario, donde la enfermería y la epidemiología caminan de la mano.
+            </div>
+
+            <div class="mensaje-segmento">
                 <strong>Pasión por la Inmunización:</strong><br>
                 Gracias por ayudarme a entender las vacunas, despertar en mí un genuino interés por ellas y reafirmar mi vocación en este campo. ¡Arriba la Salud Pública!
             </div>
@@ -251,8 +381,13 @@
             <div class="frase-cierre">
                 "Una vacuna va mucho más allá de una técnica; es el arte de proteger a toda una comunidad."
             </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+
+            <div class="share-box">
+                🔗 Enlace directo para compartir: <span id="link-wendy"></span>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button>
             </div>
         </div>
 
@@ -272,32 +407,93 @@
             </div>
 
             <div class="mensaje-segmento">
+                <strong>La Administración con Sentido Humano:</strong><br>
+                Me enseñó que la gestión eficiente de recursos no es solo un proceso burocrático, sino el engranaje vital que permite que los programas de salud operen con fluidez y beneficien directamente a quienes más lo necesitan.
+            </div>
+
+            <div class="mensaje-segmento">
                 <strong>El Motor de la Operación:</strong><br>
-                Gracias por enseñarme que la administración en salud va mucho más allá de la simple organización: es el pilar estratégico que sostiene toda la labor asistencial y preventiva.
+                Gracias por enseñarme que la administración en salud sostiene toda la labor preventiva y asistencial con orden, inteligencia y una actitud resolutiva admirable.
             </div>
 
             <div class="frase-cierre">
                 "La administración va más allá de la gestión: es conocer a la población y transformar los recursos en soluciones."
             </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+
+            <div class="share-box">
+                🔗 Enlace directo para compartir: <span id="link-bere"></span>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button>
             </div>
         </div>
 
     </div>
 
     <script>
+        // Generar partículas flotantes dinámicas en el fondo (estilo TikTok)
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 15 + 8;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            
+            const duration = Math.random() * 6 + 6;
+            const delay = Math.random() * 5;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+
+        // Configurar enlaces de compartición automáticos
+        const baseUrl = window.location.href.split('?')[0];
+        ['elisa', 'manuel', 'wendy', 'bere'].forEach(name => {
+            const linkSpan = document.getElementById(`link-${name}`);
+            if (linkSpan) {
+                linkSpan.textContent = `${baseUrl}?p=${name}`;
+            }
+        });
+
+        // Función para cambiar de tarjeta de forma fluida
         function mostrarTarjeta(id) {
-            // Ocultar todas las tarjetas
             const tarjetas = document.querySelectorAll('.tarjeta-romantica');
             tarjetas.forEach(t => t.classList.remove('active'));
 
-            // Mostrar la seleccionada
-            document.getElementById(id).classList.add('active');
+            const targetCard = document.getElementById(id);
+            if (targetCard) {
+                targetCard.classList.add('active');
+            }
 
-            // Scroll suave hacia arriba
+            // Cambiar URL state sin recargar la página (para compartir fácilmente)
+            if (id === 'inicio') {
+                window.history.pushState({}, '', baseUrl);
+                document.getElementById('main-title').style.display = 'block';
+                document.getElementById('main-subtitle').style.display = 'block';
+                document.getElementById('menu-buttons').style.display = 'grid';
+            } else {
+                window.history.pushState({}, '', `${baseUrl}?p=${id}`);
+                // Opcional: ocultar menú superior si quieres que cada quien vea solo su tarjeta limpia
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Auto-detectar parámetro en la URL al cargar (ej. index.html?p=elisa)
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const persona = urlParams.get('p');
+            if (persona && document.getElementById(persona)) {
+                mostrarTarjeta(persona);
+            }
+        });
     </script>
 </body>
 </html>
