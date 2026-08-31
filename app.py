@@ -1,5 +1,4 @@
 import streamlit as st
-import time
 
 # Configuración de la página
 st.set_page_config(
@@ -73,7 +72,6 @@ st.markdown("""
     
     .segment-1 { animation-delay: 0.1s; border-color: #38bdf8; }
     .segment-2 { animation-delay: 0.3s; border-color: #818cf8; }
-    .segment-3 { animation-delay: 0.5s; border-color: #c084fc; }
     
     .prezi-quote {
         font-style: italic;
@@ -203,4 +201,20 @@ elif seccion == "💉 Enf. Wendy":
     """, unsafe_allow_html=True)
 
 # --- 5. LIC. BERE ---
-elif seccion == "📋
+elif seccion == "📋 Lic. Bere":
+    st.markdown("""
+        <div class="prezi-stage">
+            <div class="prezi-title">📋 Lic. Bere</div>
+            <div class="segment-box segment-1">
+                <strong>Población Clave y Gestión Operativa:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la epidemiología va mucho más allá de administrar insumos o cumplir con trámites administrativos; es conocer a profundidad a la población clave para aterrizar estrategias efectivas y alinear los lineamientos vigentes a la realidad operativa.
+            </div>
+            <div class="segment-box segment-2">
+                <strong>Apertura, Soluciones y Curiosidad:</strong><br>
+                Admiro enormemente su apertura al conocimiento, su disposición para enseñar sin reservas y su capacidad para no limitarse ante los obstáculos, encontrando siempre soluciones prácticas. Me demostró que la curiosidad es una virtud y que ante la duda, preguntar siempre abre la puerta al crecimiento. Gracias por enseñarme que la gestión en salud es el motor invisible que sostiene todo lo demás.
+            </div>
+            <div class="prezi-quote">
+                "La administración va más allá de la gestión: es conocer a la población y transformar los recursos en soluciones."
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
