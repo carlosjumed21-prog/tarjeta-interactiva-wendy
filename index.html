@@ -1,269 +1,244 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agradecimiento Especial - Rotación de Epidemiología</title>
-    <!-- Librería de Confeti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+import streamlit as st
+
+# Configuración de la página
+st.set_page_config(
+    page_title="Para mi equipo de rotación | Epidemiología",
+    page_icon="💖",
+    layout="centered"
+)
+
+# Estilos CSS avanzados inspirados en tarjetas románticas interactivas con corazones flotantes
+st.markdown("""
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            padding: 20px;
-        }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Fondo general con un toque sutil y elegante */
+    .stApp {
+        background: linear-gradient(135deg, #0f172a 1e293b 0%, #1e1b4b 100%);
+        background-color: #0f172a;
+    }
+    
+    /* Contenedor principal estilo tarjeta digital romántica */
+    .tarjeta-romantica {
+        background: rgba(30, 41, 59, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 24px;
+        color: #f8fafc;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 63, 94, 0.2);
+        border: 1px solid rgba(244, 63, 94, 0.3);
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        animation: fadeInCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .titulo-tarjeta {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #fb7185;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid rgba(244, 63, 94, 0.3);
+        padding-bottom: 0.5rem;
+        text-align: center;
+    }
+    
+    .mensaje-segmento {
+        background: rgba(15, 23, 42, 0.6);
+        padding: 1.2rem 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 1.2rem;
+        border-left: 5px solid #fb7185;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #cbd5e1;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        animation: slideUp 0.6s ease-out both;
+    }
+    
+    .mensaje-segmento strong {
+        color: #fff1f2;
+    }
+    
+    .frase-cierre {
+        font-style: italic;
+        color: #fda4af;
+        text-align: center;
+        margin-top: 1.5rem;
+        font-size: 1rem;
+        border-top: 1px dashed rgba(244, 63, 94, 0.3);
+        padding-top: 1rem;
+    }
+    
+    @keyframes fadeInCard {
+        from { opacity: 0; transform: translateY(20px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
-        .presentation-container {
-            width: 100%;
-            max-width: 650px;
-            position: relative;
-        }
-
-        /* Estilo general de las "Diapositivas" tipo Prezi */
-        .slide {
-            background: #ffffff;
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            text-align: center;
-            display: none;
-            opacity: 0;
-            transform: scale(0.9) translateY(30px);
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-        }
-
-        .slide.active {
-            display: block;
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-
-        h1 { color: #1a365d; font-size: 2rem; margin-bottom: 0.5rem; }
-        h2 { color: #2b6cb0; font-size: 1.6rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .subtitle { color: #4a5568; font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.5; }
-
-        /* Contenedor de la ilustración / foto */
-        .illustration-frame {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 1.5rem auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid #ebf8ff;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .illustration-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Estilo de los mensajes seccionados */
-        .message-content {
-            background: #f7fafc;
-            border-left: 5px solid #3182ce;
-            padding: 20px;
-            border-radius: 0 16px 16px 0;
-            text-align: left;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-            color: #2d3748;
-            line-height: 1.7;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        /* Botones de navegación */
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 1rem;
-        }
-        
-        .btn {
-            background: #f8fafc;
-            color: #2d3748;
-            border: 2px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 16px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .btn:hover { 
-            transform: translateY(-4px); 
-            background: #ebf8ff;
-            border-color: #3182ce;
-            color: #2b6cb0;
-            box-shadow: 0 6px 15px rgba(49,130,206,0.15);
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1.5rem;
-        }
-
-        .action-btn {
-            background: #3182ce;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: background 0.2s, transform 0.2s;
-        }
-        .action-btn:hover { background: #2b6cb0; transform: scale(1.03); }
-        .action-btn.secondary { background: #e2e8f0; color: #4a5568; }
-        .action-btn.secondary:hover { background: #cbd5e0; }
-
-        /* Destellos dinámicos decorativos */
-        .badge-tag {
-            display: inline-block;
-            background: #ebf8ff;
-            color: #2b6cb0;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
     </style>
-</head>
-<body>
+""", unsafe_allow_html=True)
 
-    <div class="presentation-container">
+# Control de estados para la navegación
+if 'seccion' not in st.session_state:
+    st.session_state.seccion = 'inicio'
 
-        <!-- DIAPOSITIVA 1: Portada / Menú Principal -->
-        <div id="slide-main" class="slide active">
-            <div class="illustration-frame" style="background: #ebf8ff; font-size: 3rem;">
-                🎯
-            </div>
-            <h1>¡Hola! 👋</h1>
-            <p class="subtitle">He preparado esta presentación interactiva para agradecerles de manera muy especial por todo el aprendizaje compartido durante esta rotación.</p>
+# --- MENÚ DE BOTONES PRINCIPAL ---
+st.markdown("<h3 style='text-align: center; color: #f43f5e;'>✨ Dedicatorias de Rotación ✨</h3>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.95rem;'>Selecciona un destinatario para abrir su tarjeta:</p>", unsafe_allow_html=True)
+
+col_btn1, col_btn2, col_btn3, col_btn4 = st.columns(4)
+
+with col_btn1:
+    if st.button("👩‍⚕️ Dra. Elisa", use_container_width=True):
+        st.session_state.seccion = 'elisa'
+with col_btn2:
+    if st.button("🔬 Dr. Manuel", use_container_width=True):
+        st.session_state.seccion = 'manuel'
+with col_btn3:
+    if st.button("💉 Enf. Wendy", use_container_width=True):
+        st.session_state.seccion = 'wendy'
+with col_btn4:
+    if st.button("📋 Lic. Bere", use_container_width=True):
+        st.session_state.seccion = 'bere'
+
+st.write("")
+
+# --- VISTA DE INICIO ---
+if st.session_state.seccion == 'inicio':
+    st.markdown("""
+        <div class="tarjeta-romantica" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">💖</div>
+            <div class="titulo-tarjeta" style="border: none; justify-content: center;">Agradecimientos con Estilo</div>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.6;">
+                Un espacio interactivo diseñado con mucho cariño para reconocer el gran liderazgo, la guía y los aprendizajes que me llevé de cada uno de ustedes en esta etapa de especialidad.
+            </p>
+            <p style="color: #fb7185; margin-top: 20px; font-weight: 600;">Haz clic arriba en los botones para comenzar 👆</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+# --- VISTA: DRA. ELISA ---
+elif st.session_state.seccion == 'elisa':
+    st.markdown("""
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">👩‍⚕️ Dra. Elisa</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
             
-            <p style="font-weight: 600; color: #4a5568; margin-bottom: 1rem;">Selecciona a un integrante para ver su mensaje:</p>
+            <div class="mensaje-segmento">
+                <strong>Visión y Liderazgo Humano:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la Epidemiología va mucho más allá de números fríos y métricas en un reporte: es saber tomar decisiones con empatía, gestionar la incertidumbre y liderar un equipo con una visión profundamente humana para conseguir metas que realmente transformen la salud de la comunidad.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>Estrategia y Prevención:</strong><br>
+                Gracias por impulsarme a pensar de forma estratégica, por cada consejo oportuno y por contagiarme esa pasión inquebrantable por la prevención. Gracias por enseñarme la Medicina Preventiva desde su verdadero sentido y por recordarme que, detrás de cada indicador y cada estadística, siempre hay personas esperando una respuesta.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>Modelo a Seguir:</strong><br>
+                Me llevo la lección de que anticiparse, educar y guiar con el ejemplo es la herramienta más poderosa que tenemos en nuestra disciplina. ¡Gracias por ser una mentora excepcional!
+            </div>
+
+            <div class="frase-cierre">
+                "Liderar con visión humana y transformar los datos en bienestar comunitario."
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+# --- VISTA: DR. MANUEL ---
+elif st.session_state.seccion == 'manuel':
+    st.markdown("""
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">🔬 Dr. Manuel</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
             
-            <div class="buttons-grid">
-                <button class="btn" onclick="irASlide('elisa')">🩺 Dra. Elisa</button>
-                <button class="btn" onclick="irASlide('wendy')">💉 Enf. Wendy</button>
-                <button class="btn" onclick="irASlide('bere')">📋 Lic. Bere</button>
-                <button class="btn" onclick="irASlide('manuel')">🔬 Dr. Manuel</button>
+            <div class="mensaje-segmento">
+                <strong>Vigilancia Activa en el Terreno:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver indicadores detrás de un escritorio y exige salir al campo a hacer una verdadera vigilancia activa. Me demostró que lo fundamental es poseer bases sólidas y comprender a fondo el porqué clínico y social de los eventos de salud.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>Rigor Científico y Criterio:</strong><br>
+                Gracias por desafiar mi pensamiento analítico, por regalarme un enfoque clínico-epidemiológico completamente distinto y por mostrarme que el rigor científico, unido a la curiosidad constante, son las herramientas más poderosas de un médico especialista más allá de supervisiones burocráticas.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>Pensamiento Crítico:</strong><br>
+                Su exigencia y mentoría me enseñaron a no dar nada por sentado, a cuestionar la evidencia con bases firmes y a buscar siempre la excelencia técnica en cada análisis.
+            </div>
+
+            <div class="frase-cierre">
+                "Entender el porqué de las cosas para hacer una vigilancia activa y con rigor científico."
             </div>
         </div>
+    """, unsafe_allow_html=True)
 
-        <!-- DIAPOSITIVA: Dra. Elisa -->
-        <div id="slide-elisa" class="slide">
-            <span class="badge-tag">Rotación de Epidemiología</span>
-            <div class="illustration-frame">
-                <!-- Puedes cambiar el enlace de abajo por la foto o ilustración que prefieras -->
-                <img src="https://images.unsplash.com/photo-1594824813589-39908cfd7ea2?auto=format&fit=crop&w=300&q=80" alt="Dra. Elisa">
+# --- VISTA: ENF. WENDY ---
+elif st.session_state.seccion == 'wendy':
+    st.markdown("""
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">💉 Enf. Wendy</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
+            
+            <div class="mensaje-segmento">
+                <strong>Escenarios y Cuidado Individualizado:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver las vacunas como simples esquemas fijos que cumplir en un papel. Me enseñó a leer los diferentes escenarios operativos, a individualizar a cada paciente para brindarle una atención de calidad y a dimensionar la compleja red logística que hay detrás de la inmunización.
             </div>
-            <h2>🩺 Dra. Elisa</h2>
-            <div class="message-content">
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va mucho más allá de números y métricas frías: es saber tomar decisiones con empatía, gestionar la incertidumbre y liderar un equipo con visión humana para conseguir metas que realmente transformen la salud de la comunidad. Gracias por impulsarme a pensar de forma estratégica, por cada consejo y por contagiarme esa pasión por la prevención. Gracias por enseñarme un poquito de la Medicina Preventiva desde su verdadero sentido y por recordarme que detrás de cada dato siempre hay personas.
+
+            <div class="mensaje-segmento">
+                <strong>Gestión de la Cadena de Frío:</strong><br>
+                Gracias por guiarme desde la gestión detallada de un puesto de vacunación hasta la importancia crítica de cuidar cada parámetro de la red de frío para garantizar la efectividad del biológico. Comprendí que aplicar una vacuna trasciende la técnica mecánica: es un acto sublime de protección comunitaria.
             </div>
-            <div class="nav-buttons">
-                <button class="action-btn secondary" onclick="irASlide('main')">← Menú principal</button>
-                <button class="action-btn" onclick="irASlide('wendy')">Siguiente: Enf. Wendy →</button>
+
+            <div class="mensaje-segmento">
+                <strong>Pasión por la Inmunización:</strong><br>
+                Gracias por ayudarme a entender las vacunas, despertar en mí un genuino interés por ellas y reafirmar mi vocación en este campo. ¡Arriba la Salud Pública!
+            </div>
+
+            <div class="frase-cierre">
+                "Una vacuna va mucho más allá de una técnica; es el arte de proteger a toda una comunidad."
             </div>
         </div>
+    """, unsafe_allow_html=True)
 
-        <!-- DIAPOSITIVA: Enf. Wendy -->
-        <div id="slide-wendy" class="slide">
-            <span class="badge-tag">Inmunología y Vacunación</span>
-            <div class="illustration-frame">
-                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=300&q=80" alt="Enf. Wendy">
+# --- VISTA: LIC. BERE ---
+elif st.session_state.seccion == 'bere':
+    st.markdown("""
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">📋 Lic. Bere</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
+            
+            <div class="mensaje-segmento">
+                <strong>Población Clave y Gestión Operativa:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la epidemiología va mucho más allá de administrar insumos o cumplir con trámites administrativos; es conocer a profundidad a la población clave para aterrizar estrategias efectivas y alinear los lineamientos vigentes a la realidad operativa.
             </div>
-            <h2>💉 Enf. Wendy</h2>
-            <div class="message-content">
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver las vacunas como simples esquemas fijos a cumplir. Me enseñó a conocer los diferentes escenarios, a individualizar a cada paciente para brindarle una atención de calidad y a comprender la logística compleja que hay detrás de la inmunización. Gracias por guiarme desde la gestión detallada de un puesto de vacunación hasta la importancia de cuidar cada parámetro de la red de frío para que el biológico conserve su efectividad. Comprendí que aplicar una vacuna trasciende la técnica: es un acto de protección comunitaria que requiere vocación y precisión. Gracias por ayudarme a entender este mundo y despertar en mí un genuino interés por la inmunología aplicada. ¡Arriba la Salud Pública!
+
+            <div class="mensaje-segmento">
+                <strong>Apertura, Soluciones y Curiosidad:</strong><br>
+                Admiro enormemente su apertura al conocimiento, su disposición para enseñar sin reservas y su capacidad para no limitarse ante los obstáculos, encontrando siempre soluciones prácticas. Me demostró que la curiosidad es una virtud y que ante la duda, preguntar siempre abre la puerta al crecimiento.
             </div>
-            <div class="nav-buttons">
-                <button class="action-btn secondary" onclick="irASlide('elisa')">← Anterior</button>
-                <button class="action-btn" onclick="irASlide('bere')">Siguiente: Lic. Bere →</button>
+
+            <div class="mensaje-segmento">
+                <strong>El Motor de la Operación:</strong><br>
+                Gracias por enseñarme que la administración en salud va mucho más allá de la simple organización: es el pilar estratégico que sostiene toda la labor asistencial y preventiva.
+            </div>
+
+            <div class="frase-cierre">
+                "La administración va más allá de la gestión: es conocer a la población y transformar los recursos en soluciones."
             </div>
         </div>
+    """, unsafe_allow_html=True)
 
-        <!-- DIAPOSITIVA: Lic. Bere -->
-        <div id="slide-bere" class="slide">
-            <span class="badge-tag">Gestión y Población Clave</span>
-            <div class="illustration-frame">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Lic. Bere">
-            </div>
-            <h2>📋 Lic. Bere</h2>
-            <div class="message-content">
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va mucho más allá de administrar insumos o cumplir con reportes; es conocer a profundidad a la población clave para diseñar estrategias y alinear los lineamientos vigentes a la realidad de la gente. Admiro enormemente su apertura al conocimiento, su disposición constante para enseñar y su capacidad para no limitarse ante los obstáculos, buscando siempre soluciones prácticas y efectivas. Me demostró que la curiosidad es una virtud y que ante la duda, preguntar siempre abre la puerta al crecimiento. Gracias por enseñarme que la administración en salud va mucho más allá de la simple organización y gestión: es el motor que sostiene la operación diaria.
-            </div>
-            <div class="nav-buttons">
-                <button class="action-btn secondary" onclick="irASlide('wendy')">← Anterior</button>
-                <button class="action-btn" onclick="irASlide('manuel')">Siguiente: Dr. Manuel →</button>
-            </div>
-        </div>
-
-        <!-- DIAPOSITIVA: Dr. Manuel -->
-        <div id="slide-manuel" class="slide">
-            <span class="badge-tag">Vigilancia Activa y Terreno</span>
-            <div class="illustration-frame">
-                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=80" alt="Dr. Manuel">
-            </div>
-            <h2>🔬 Dr. Manuel</h2>
-            <div class="message-content">
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver indicadores en un escritorio y exige hacer una verdadera vigilancia activa en el terreno. Me demostró que lo fundamental es tener bases sólidas, comprender el trasfondo clínico y social del porqué ocurren las cosas, y entender que la disciplina abarca mucho más que supervisiones burocráticas. Gracias por cuestionar mi pensamiento analítico, por regalarme un enfoque clínico-epidemiológico distinto y por mostrarme que el rigor científico y la curiosidad son las mejores herramientas de un buen médico.
-            </div>
-            <div class="nav-buttons">
-                <button class="action-btn secondary" onclick="irASlide('bere')">← Anterior</button>
-                <button class="action-btn" onclick="irASlide('main')">🏠 Volver al inicio</button>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        function irASlide(nombreSlide) {
-            // Ocultar todas las diapositivas
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-
-            // Mostrar la diapositiva seleccionada con un pequeño retraso fluido
-            setTimeout(() => {
-                const target = document.getElementById('slide-' + nombreSlide);
-                target.classList.add('active');
-            }, 150);
-
-            // Disparar animaciones de confeti según la sección elegida
-            if (nombreSlide === 'elisa') {
-                confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 }, colors: ['#ff6b6b', '#ff8e53', '#ffd166'] });
-            } else if (nombreSlide === 'wendy') {
-                confetti({ particleCount: 80, spread: 80, origin: { y: 0.5 }, colors: ['#3182ce', '#63b3ed', '#4fd1c5'] });
-            } else if (nombreSlide === 'bere') {
-                confetti({ particleCount: 90, spread: 90, origin: { y: 0.7 }, colors: ['#805ad5', '#d53f8c', '#ecc94b'] });
-            } else if (nombreSlide === 'manuel') {
-                confetti({ particleCount: 70, spread: 70, origin: { y: 0.6 }, colors: ['#2b6cb0', '#2c5282', '#38a169'] });
-            }
-        }
-    </script>
-</body>
-</html>
+# Botón para regresar al inicio si estás dentro de una tarjeta
+if st.session_state.seccion != 'inicio':
+    col_back1, col_back2, col_back3 = st.columns([1, 2, 1])
+    with col_back2:
+        if st.button("🏠 Regresar al inicio", use_container_width=True):
+            st.session_state.seccion = 'inicio'
+            st.rerun()
