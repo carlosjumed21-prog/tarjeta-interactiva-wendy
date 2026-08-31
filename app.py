@@ -93,7 +93,7 @@ with col_btn4:
 
 st.write("---")
 
-# --- VISTA DE INICIO (Cuando no se ha seleccionado a nadie o se desea volver) ---
+# --- VISTA DE INICIO ---
 if st.session_state.seccion == 'inicio':
     st.markdown("""
         <div class="prezi-card" style="text-align: center;">
@@ -112,22 +112,22 @@ elif st.session_state.seccion == 'elisa':
             <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
-                <strong>Más allá de los números:</strong><br>
-                Gracias por esta rotación. Usted me enseñó que la Epidemiología va mucho más allá de números fríos y métricas en una base de datos. Me demostró que los datos son solo el inicio para entender la realidad humana y que la disciplina requiere <strong>saber tomar decisiones cruciales</strong> bajo presión.
+                <strong>Visión y Liderazgo Humano:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la Epidemiología va mucho más allá de números fríos y métricas en un reporte: es saber tomar decisiones con empatía, gestionar la incertidumbre y liderar un equipo con una visión profundamente humana para conseguir metas que realmente transformen la salud de la comunidad.
             </div>
 
             <div class="mensaje-segmento">
-                <strong>Liderazgo y Visión Integral:</strong><br>
-                Aprendí de usted la importancia de <strong>liderar un equipo</strong> con empatía y dirección clara para conseguir metas ambiciosas pero alcanzables en salud pública. Usted no solo gestiona; inspira al equipo a trabajar con un propósito común.
+                <strong>Estrategia y Prevención:</strong><br>
+                Gracias por impulsarme a pensar de forma estratégica, por cada consejo oportuno y por contagiarme esa pasión inquebrantable por la prevención. Gracias por enseñarme la Medicina Preventiva desde su verdadero sentido y por recordarme que, detrás de cada indicador y cada estadística, siempre hay personas esperando una respuesta.
             </div>
 
             <div class="mensaje-segmento">
-                <strong>La esencia de la prevención:</strong><br>
-                Gracias, de corazón, por enseñarme un poquito de la <strong>Medicina Preventiva</strong> desde su enfoque más humano y efectivo. Me llevo la lección de que anticiparse y educar es la herramienta más poderosa que tenemos. ¡Gracias por ser un modelo a seguir!
+                <strong>Modelo a Seguir:</strong><br>
+                Me llevo la lección de que anticiparse, educar y guiar con el ejemplo es la herramienta más poderosa que tenemos en nuestra disciplina. ¡Gracias por ser una mentora excepcional!
             </div>
 
             <div class="frase-cierre">
-                "La medicina cura al hombre, la medicina veterinaria cura a la humanidad." - Louis Pasteur
+                "Liderar con visión humana y transformar los datos en bienestar comunitario."
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -140,13 +140,18 @@ elif st.session_state.seccion == 'manuel':
             <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
-                <strong>Vigilancia y Terreno:</strong><br>
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver indicadores en un escritorio y exige hacer una verdadera vigilancia activa en el terreno, comprendiendo el trasfondo clínico y social de cada evento.
+                <strong>Vigilancia Activa en el Terreno:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver indicadores detrás de un escritorio y exige salir al campo a hacer una verdadera vigilancia activa. Me demostró que lo fundamental es poseer bases sólidas y comprender a fondo el porqué clínico y social de los eventos de salud.
             </div>
 
             <div class="mensaje-segmento">
-                <strong>Rigor Analítico:</strong><br>
-                Gracias por cuestionar mi pensamiento analítico, por regalarme un enfoque clínico-epidemiológico distinto y por mostrarme que la curiosidad constante y la solidez técnica son las mejores herramientas de un especialista.
+                <strong>Rigor Científico y Criterio:</strong><br>
+                Gracias por desafiar mi pensamiento analítico, por regalarme un enfoque clínico-epidemiológico completamente distinto y por mostrarme que el rigor científico, unido a la curiosidad constante, son las herramientas más poderosas de un médico especialista más allá de supervisiones burocráticas.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>Pensamiento Crítico:</strong><br>
+                Su exigencia y mentoría me enseñaron a no dar nada por sentado, a cuestionar la evidencia con bases firmes y a buscar siempre la excelencia técnica en cada análisis.
             </div>
 
             <div class="frase-cierre">
@@ -163,13 +168,18 @@ elif st.session_state.seccion == 'wendy':
             <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
-                <strong>Más allá del esquema:</strong><br>
-                Usted me enseñó que la epidemiología va más allá de ver las vacunas como simples esquemas fijos. Me enseñó a individualizar a cada paciente y a comprender la logística compleja que hay detrás de la inmunización.
+                <strong>Escenarios y Cuidado Individualizado:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver las vacunas como simples esquemas fijos que cumplir en un papel. Me enseñó a leer los diferentes escenarios operativos, a individualizar a cada paciente para brindarle una atención de calidad y a dimensionar la compleja red logística que hay detrás de la inmunización.
             </div>
 
             <div class="mensaje-segmento">
-                <strong>Red de frío y precisión:</strong><br>
-                Desde la gestión detallada de un puesto de vacunación hasta cuidar cada parámetro de la red de frío. Comprendí que aplicar una vacuna es un acto sublime de protección comunitaria. ¡Arriba la Salud Pública!
+                <strong>Gestión de la Cadena de Frío:</strong><br>
+                Gracias por guiarme desde la gestión detallada de un puesto de vacunación hasta la importancia crítica de cuidar cada parámetro de la red de frío para garantizar la efectividad del biológico. Comprendí que aplicar una vacuna trasciende la técnica mecánica: es un acto sublime de protección comunitaria.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>Pasión por la Inmunización:</strong><br>
+                Gracias por ayudarme a entender las vacunas, despertar en mí un genuino interés por ellas y reafirmar mi vocación en este campo. ¡Arriba la Salud Pública!
             </div>
 
             <div class="frase-cierre">
@@ -186,13 +196,18 @@ elif st.session_state.seccion == 'bere':
             <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
-                <strong>Población clave y estrategia:</strong><br>
-                Usted me enseñó que la epidemiología va mucho más allá de administrar insumos o cumplir reportes; es conocer a profundidad a la población clave para diseñar estrategias alineadas a la realidad de la gente.
+                <strong>Población Clave y Gestión Operativa:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la epidemiología va mucho más allá de administrar insumos o cumplir con trámites administrativos; es conocer a profundidad a la población clave para aterrizar estrategias efectivas y alinear los lineamientos vigentes a la realidad operativa.
             </div>
 
             <div class="mensaje-segmento">
-                <strong>Disposición y Apertura:</strong><br>
-                Admiro enormemente su disposición constante para enseñar y su capacidad para no limitarse ante los obstáculos. Me demostró que ante la duda, preguntar siempre abre la puerta al crecimiento.
+                <strong>Apertura, Soluciones y Curiosidad:</strong><br>
+                Admiro enormemente su apertura al conocimiento, su disposición para enseñar sin reservas y su capacidad para no limitarse ante los obstáculos, encontrando siempre soluciones prácticas. Me demostró que la curiosidad es una virtud y que ante la duda, preguntar siempre abre la puerta al crecimiento.
+            </div>
+
+            <div class="mensaje-segmento">
+                <strong>El Motor de la Operación:</strong><br>
+                Gracias por enseñarme que la administración en salud va mucho más allá de la simple organización: es el pilar estratégico que sostiene toda la labor asistencial y preventiva.
             </div>
 
             <div class="frase-cierre">
