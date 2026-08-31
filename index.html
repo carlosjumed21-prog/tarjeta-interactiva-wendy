@@ -1,134 +1,181 @@
-import streamlit as st
-
-# Configuración de la página
-st.set_page_config(
-    page_title="Para mi equipo de rotación | Epidemiología",
-    page_icon="💖",
-    layout="centered"
-)
-
-# Estilos CSS avanzados inspirados en tarjetas románticas interactivas con corazones flotantes
-st.markdown("""
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agradecimientos de Rotación | Epidemiología</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-    
-    html, body, [class*="css"] {
-        font-family: 'Poppins', sans-serif;
-    }
-    
-    /* Fondo general con un toque sutil y elegante */
-    .stApp {
-        background: linear-gradient(135deg, #0f172a 1e293b 0%, #1e1b4b 100%);
-        background-color: #0f172a;
-    }
-    
-    /* Contenedor principal estilo tarjeta digital romántica */
-    .tarjeta-romantica {
-        background: rgba(30, 41, 59, 0.85);
-        backdrop-filter: blur(10px);
-        padding: 2.5rem;
-        border-radius: 24px;
-        color: #f8fafc;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 63, 94, 0.2);
-        border: 1px solid rgba(244, 63, 94, 0.3);
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-        animation: fadeInCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    
-    .titulo-tarjeta {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #fb7185;
-        margin-bottom: 1rem;
-        border-bottom: 2px solid rgba(244, 63, 94, 0.3);
-        padding-bottom: 0.5rem;
-        text-align: center;
-    }
-    
-    .mensaje-segmento {
-        background: rgba(15, 23, 42, 0.6);
-        padding: 1.2rem 1.5rem;
-        border-radius: 16px;
-        margin-bottom: 1.2rem;
-        border-left: 5px solid #fb7185;
-        font-size: 1.05rem;
-        line-height: 1.7;
-        color: #cbd5e1;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        animation: slideUp 0.6s ease-out both;
-    }
-    
-    .mensaje-segmento strong {
-        color: #fff1f2;
-    }
-    
-    .frase-cierre {
-        font-style: italic;
-        color: #fda4af;
-        text-align: center;
-        margin-top: 1.5rem;
-        font-size: 1rem;
-        border-top: 1px dashed rgba(244, 63, 94, 0.3);
-        padding-top: 1rem;
-    }
-    
-    @keyframes fadeInCard {
-        from { opacity: 0; transform: translateY(20px) scale(0.97); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #f43f5e;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Botones de navegación */
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-btn {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            color: #f8fafc;
+            padding: 10px 5px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #f43f5e;
+            border-color: #f43f5e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4);
+        }
+
+        /* Tarjeta principal */
+        .tarjeta-romantica {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 63, 94, 0.2);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            display: none;
+            animation: fadeInCard 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .tarjeta-romantica.active {
+            display: block;
+        }
+
+        .titulo-tarjeta {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fb7185;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(244, 63, 94, 0.3);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .card-subtitle {
+            color: #fb7185;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .mensaje-segmento {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1.2rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid #fb7185;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #cbd5e1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .mensaje-segmento strong {
+            color: #fff1f2;
+        }
+
+        .frase-cierre {
+            font-style: italic;
+            color: #fda4af;
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            border-top: 1px dashed rgba(244, 63, 94, 0.3);
+            padding-top: 1rem;
+        }
+
+        .home-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            .nav-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
-""", unsafe_allow_html=True)
+</head>
+<body>
 
-# Control de estados para la navegación
-if 'seccion' not in st.session_state:
-    st.session_state.seccion = 'inicio'
+    <div class="container">
+        <h3>✨ Dedicatorias de Rotación ✨</h3>
+        <p class="subtitle">Selecciona un destinatario para abrir su tarjeta:</p>
 
-# --- MENÚ DE BOTONES PRINCIPAL ---
-st.markdown("<h3 style='text-align: center; color: #f43f5e;'>✨ Dedicatorias de Rotación ✨</h3>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.95rem;'>Selecciona un destinatario para abrir su tarjeta:</p>", unsafe_allow_html=True)
+        <!-- Botones de Menú -->
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="mostrarTarjeta('elisa')">👩‍⚕️ Elisa</button>
+            <button class="nav-btn" onclick="mostrarTarjeta('manuel')">🔬 Manuel</button>
+            <button class="nav-btn" onclick="mostrarTarjeta('wendy')">💉 Wendy</button>
+            <button class="nav-btn" onclick="mostrarTarjeta('bere')">📋 Bere</button>
+        </div>
 
-col_btn1, col_btn2, col_btn3, col_btn4 = st.columns(4)
-
-with col_btn1:
-    if st.button("👩‍⚕️ Dra. Elisa", use_container_width=True):
-        st.session_state.seccion = 'elisa'
-with col_btn2:
-    if st.button("🔬 Dr. Manuel", use_container_width=True):
-        st.session_state.seccion = 'manuel'
-with col_btn3:
-    if st.button("💉 Enf. Wendy", use_container_width=True):
-        st.session_state.seccion = 'wendy'
-with col_btn4:
-    if st.button("📋 Lic. Bere", use_container_width=True):
-        st.session_state.seccion = 'bere'
-
-st.write("")
-
-# --- VISTA DE INICIO ---
-if st.session_state.seccion == 'inicio':
-    st.markdown("""
-        <div class="tarjeta-romantica" style="text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 10px;">💖</div>
-            <div class="titulo-tarjeta" style="border: none; justify-content: center;">Agradecimientos con Estilo</div>
-            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.6;">
+        <!-- VISTA DE INICIO -->
+        <div id="inicio" class="tarjeta-romantica active" style="text-align: center;">
+            <div class="home-icon">💖</div>
+            <div class="titulo-tarjeta" style="border: none;">Agradecimientos con Estilo</div>
+            <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-top: 1rem;">
                 Un espacio interactivo diseñado con mucho cariño para reconocer el gran liderazgo, la guía y los aprendizajes que me llevé de cada uno de ustedes en esta etapa de especialidad.
             </p>
             <p style="color: #fb7185; margin-top: 20px; font-weight: 600;">Haz clic arriba en los botones para comenzar 👆</p>
         </div>
-    """, unsafe_allow_html=True)
 
-# --- VISTA: DRA. ELISA ---
-elif st.session_state.seccion == 'elisa':
-    st.markdown("""
-        <div class="tarjeta-romantica">
+        <!-- TARJETA: DRA. ELISA -->
+        <div id="elisa" class="tarjeta-romantica">
             <div class="titulo-tarjeta">👩‍⚕️ Dra. Elisa</div>
-            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
+            <div class="card-subtitle">Por su guía excepcional durante esta rotación</div>
             
             <div class="mensaje-segmento">
                 <strong>Visión y Liderazgo Humano:</strong><br>
@@ -148,15 +195,15 @@ elif st.session_state.seccion == 'elisa':
             <div class="frase-cierre">
                 "Liderar con visión humana y transformar los datos en bienestar comunitario."
             </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+            </div>
         </div>
-    """, unsafe_allow_html=True)
 
-# --- VISTA: DR. MANUEL ---
-elif st.session_state.seccion == 'manuel':
-    st.markdown("""
-        <div class="tarjeta-romantica">
+        <!-- TARJETA: DR. MANUEL -->
+        <div id="manuel" class="tarjeta-romantica">
             <div class="titulo-tarjeta">🔬 Dr. Manuel</div>
-            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
+            <div class="card-subtitle">Por su guía excepcional durante esta rotación</div>
             
             <div class="mensaje-segmento">
                 <strong>Vigilancia Activa en el Terreno:</strong><br>
@@ -176,15 +223,15 @@ elif st.session_state.seccion == 'manuel':
             <div class="frase-cierre">
                 "Entender el porqué de las cosas para hacer una vigilancia activa y con rigor científico."
             </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+            </div>
         </div>
-    """, unsafe_allow_html=True)
 
-# --- VISTA: ENF. WENDY ---
-elif st.session_state.seccion == 'wendy':
-    st.markdown("""
-        <div class="tarjeta-romantica">
+        <!-- TARJETA: ENF. WENDY -->
+        <div id="wendy" class="tarjeta-romantica">
             <div class="titulo-tarjeta">💉 Enf. Wendy</div>
-            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
+            <div class="card-subtitle">Por su guía excepcional durante esta rotación</div>
             
             <div class="mensaje-segmento">
                 <strong>Escenarios y Cuidado Individualizado:</strong><br>
@@ -204,15 +251,15 @@ elif st.session_state.seccion == 'wendy':
             <div class="frase-cierre">
                 "Una vacuna va mucho más allá de una técnica; es el arte de proteger a toda una comunidad."
             </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+            </div>
         </div>
-    """, unsafe_allow_html=True)
 
-# --- VISTA: LIC. BERE ---
-elif st.session_state.seccion == 'bere':
-    st.markdown("""
-        <div class="tarjeta-romantica">
+        <!-- TARJETA: LIC. BERE -->
+        <div id="bere" class="tarjeta-romantica">
             <div class="titulo-tarjeta">📋 Lic. Bere</div>
-            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
+            <div class="card-subtitle">Por su guía excepcional durante esta rotación</div>
             
             <div class="mensaje-segmento">
                 <strong>Población Clave y Gestión Operativa:</strong><br>
@@ -232,13 +279,25 @@ elif st.session_state.seccion == 'bere':
             <div class="frase-cierre">
                 "La administración va más allá de la gestión: es conocer a la población y transformar los recursos en soluciones."
             </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="nav-btn" onclick="mostrarTarjeta('inicio')" style="width: auto; padding: 8px 20px;">🏠 Regresar al inicio</button>
+            </div>
         </div>
-    """, unsafe_allow_html=True)
 
-# Botón para regresar al inicio si estás dentro de una tarjeta
-if st.session_state.seccion != 'inicio':
-    col_back1, col_back2, col_back3 = st.columns([1, 2, 1])
-    with col_back2:
-        if st.button("🏠 Regresar al inicio", use_container_width=True):
-            st.session_state.seccion = 'inicio'
-            st.rerun()
+    </div>
+
+    <script>
+        function mostrarTarjeta(id) {
+            // Ocultar todas las tarjetas
+            const tarjetas = document.querySelectorAll('.tarjeta-romantica');
+            tarjetas.forEach(t => t.classList.remove('active'));
+
+            // Mostrar la seleccionada
+            document.getElementById(id).classList.add('active');
+
+            // Scroll suave hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
