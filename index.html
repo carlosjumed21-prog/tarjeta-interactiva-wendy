@@ -182,7 +182,7 @@
             margin-bottom: 10px;
         }
 
-        /* MODAL DE CONTRASEÑA (PIN) */
+        /* MODAL DE CONTRASEÑA */
         #pin-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -214,9 +214,8 @@
         .pin-input {
             width: 100%;
             padding: 12px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-align: center;
-            letter-spacing: 4px;
             background: #0f172a;
             border: 2px solid #334155;
             color: #fff;
@@ -254,11 +253,11 @@
     <div id="pin-modal">
         <div class="pin-box">
             <h4 id="pin-title">🔒 Tarjeta Protegida</h4>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 15px;">Introduce el código de acceso:</p>
-            <input type="text" id="pin-input" class="pin-input" placeholder="Código">
-            <div id="pin-error" class="pin-error">❌ Código incorrecto. Inténta de nuevo.</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 15px;" id="pin-instruction">Introduce tu contraseña de acceso:</p>
+            <input type="text" id="pin-input" class="pin-input" placeholder="Contraseña">
+            <div id="pin-error" class="pin-error">❌ Contraseña incorrecta. Inténta de nuevo.</div>
             <button class="nav-btn" onclick="verificarPin()" style="width: 100%; background: #f43f5e; border: none; padding: 12px;">Desbloquear Tarjeta</button>
-            <button class="nav-btn" onclick="cerrarPinModal()" style="width: 100%; background: transparent; border: none; margin-top: 10px; color: #94a3b8;">Cancelar</button>
+            <button class="nav-btn" onclick="cancelarPin()" style="width: 100%; background: transparent; border: none; margin-top: 10px; color: #94a3b8;" id="btn-cancelar">Cancelar</button>
         </div>
     </div>
 
@@ -291,7 +290,7 @@
             <div class="mensaje-segmento"><strong>Estrategia y Prevención:</strong><br>Gracias por impulsarme a pensar de forma estratégica, por cada consejo oportuno y por contagiarme esa pasión inquebrantable por la prevención. Gracias por enseñarme la Medicina Preventiva desde su verdadero sentido y por recordarme que, detrás de cada indicador y cada estadística, siempre hay personas esperando una respuesta.</div>
             <div class="mensaje-segmento"><strong>Modelo a Seguir:</strong><br>Me llevo la lección de que anticiparse, educar y guiar con el ejemplo es la herramienta más poderosa que tenemos en nuestra disciplina. ¡Gracias por ser una mentora excepcional!</div>
             <div class="frase-cierre">"Liderar con visión humana y transformar los datos en bienestar comunitario."</div>
-            <div class="share-box">🔗 Enlace directo: <span id="link-elisa"></span></div>
+            <div class="share-box">🔗 Enlace directo para Elisa: <span id="link-elisa"></span></div>
             <div style="text-align: center; margin-top: 25px;"><button class="nav-btn" onclick="irInicio()" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button></div>
         </div>
 
@@ -303,7 +302,7 @@
             <div class="mensaje-segmento"><strong>Rigor Científico y Criterio:</strong><br>Gracias por desafiar mi pensamiento analítico, por regalarme un enfoque clínico-epidemiológico completamente distinto y por mostrarme que el rigor científico, unido a la curiosidad constante, son las herramientas más poderosas de un médico especialista más allá de supervisiones burocráticas.</div>
             <div class="mensaje-segmento"><strong>Pensamiento Crítico:</strong><br>Su exigencia y mentoría me enseñaron a no dar nada por sentado, a cuestionar la evidencia con bases firmes y a buscar siempre la excelencia técnica en cada análisis.</div>
             <div class="frase-cierre">"Entender el porqué de las cosas para hacer una vigilancia activa y con rigor científico."</div>
-            <div class="share-box">🔗 Enlace directo: <span id="link-manuel"></span></div>
+            <div class="share-box">🔗 Enlace directo para Manuel: <span id="link-manuel"></span></div>
             <div style="text-align: center; margin-top: 25px;"><button class="nav-btn" onclick="irInicio()" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button></div>
         </div>
 
@@ -315,7 +314,7 @@
             <div class="mensaje-segmento"><strong>Gestión de la Cadena de Frío:</strong><br>Gracias por guiarme desde la gestión detallada de un puesto de vacunación hasta la importancia crítica de cuidar cada parámetro de la red de frío para garantizar la efectividad del biológico. Comprendí que aplicar una vacuna trasciende la técnica mecánica: es un acto sublime de protección comunitaria.</div>
             <div class="mensaje-segmento"><strong>Pasión por la Inmunización:</strong><br>Gracias por ayudarme a entender las vacunas, despertar en mí un genuino interés por ellas y reafirmar mi vocación en este campo. ¡Arriba la Salud Pública!</div>
             <div class="frase-cierre">"Una vacuna va mucho más allá de una técnica; es el arte de proteger a toda una comunidad."</div>
-            <div class="share-box">🔗 Enlace directo: <span id="link-wendy"></span></div>
+            <div class="share-box">🔗 Enlace directo para Wendy: <span id="link-wendy"></span></div>
             <div style="text-align: center; margin-top: 25px;"><button class="nav-btn" onclick="irInicio()" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button></div>
         </div>
 
@@ -327,14 +326,14 @@
             <div class="mensaje-segmento"><strong>Apertura, Soluciones y Curiosidad:</strong><br>Admiro enormemente su apertura al conocimiento, su disposición para enseñar sin reservas y su capacidad para no limitarse ante los obstáculos, encontrando siempre soluciones prácticas. Me demostró que la curiosidad es una virtud y que ante la duda, preguntar siempre abre la puerta al crecimiento.</div>
             <div class="mensaje-segmento"><strong>El Motor de la Operación:</strong><br>Gracias por enseñarme que la administración en salud va mucho más allá de la simple organización: es el pilar estratégico que sostiene toda la labor asistencial y preventiva.</div>
             <div class="frase-cierre">"La administración va más allá de la gestión: es conocer a la población y transformar los recursos en soluciones."</div>
-            <div class="share-box">🔗 Enlace directo: <span id="link-bere"></span></div>
+            <div class="share-box">🔗 Enlace directo para Bere: <span id="link-bere"></span></div>
             <div style="text-align: center; margin-top: 25px;"><button class="nav-btn" onclick="irInicio()" style="width: auto; padding: 10px 25px;">🏠 Menú Principal</button></div>
         </div>
 
     </div>
 
     <script>
-        // Códigos de acceso personalizados
+        // Contraseñas asignadas
         const nips = {
             'elisa': 'Prev26',
             'manuel': 'Epi26',
@@ -343,6 +342,7 @@
         };
 
         let tarjetaPendiente = '';
+        let esEnlaceDirecto = false;
 
         // Partículas flotantes
         const particlesContainer = document.getElementById('particles');
@@ -358,23 +358,35 @@
             particlesContainer.appendChild(particle);
         }
 
-        // Enlaces para compartir
+        // Generar enlaces directos para que los compartas
         const baseUrl = window.location.href.split('?')[0];
         ['elisa', 'manuel', 'wendy', 'bere'].forEach(name => {
             document.getElementById(`link-${name}`).textContent = `${baseUrl}?p=${name}`;
         });
 
-        function solicitarPin(id) {
+        function solicitarPin(id, directo = false) {
             tarjetaPendiente = id;
+            esEnlaceDirecto = directo;
             document.getElementById('pin-input').value = '';
             document.getElementById('pin-error').style.display = 'none';
+            
+            // Ocultar botón cancelar si entraron directo por enlace para forzarlos a poner su clave
+            const btnCancelar = document.getElementById('btn-cancelar');
+            if (directo) {
+                btnCancelar.style.display = 'none';
+            } else {
+                btnCancelar.style.display = 'block';
+            }
+
             document.getElementById('pin-modal').style.display = 'flex';
             document.getElementById('pin-input').focus();
         }
 
         function cerrarPinModal() {
-            document.getElementById('pin-modal').style.display = 'none';
-            tarjetaPendiente = '';
+            if (!esEnlaceDirecto) {
+                document.getElementById('pin-modal').style.display = 'none';
+                tarjetaPendiente = '';
+            }
         }
 
         function verificarPin() {
@@ -402,12 +414,12 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Detectar si abren un enlace directo (ej. ?p=elisa) y pedir PIN automáticamente
+        // Al cargar la página, detecta si abrieron un enlace personalizado (?p=...)
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const persona = urlParams.get('p');
             if (persona && nips[persona]) {
-                solicitarPin(persona);
+                solicitarPin(persona, true);
             }
         });
     </script>
