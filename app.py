@@ -1,121 +1,158 @@
 import streamlit as st
 
-# Configuración de la página
+# --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
-    page_title="Agradecimientos de Rotación | Epidemiología",
-    page_icon="🩺",
+    page_title="¡Gracias por la Rotación!",
+    page_icon="✨",
     layout="centered"
 )
 
-# Estilos CSS avanzados con efectos visuales dinámicos tipo Prezi, transiciones suaves y partículas
+# --- ESTILOS CSS (LA MAGIA VISUAL) ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
-    
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+    /* Importar fuentes de Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
+
+    /* Estilo general de la página */
+    .stApp {
+        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+        background-size: 20px 20px;
+        font-family: 'Poppins', sans-serif;
     }
-    
-    /* Contenedor principal con efecto de zoom y fundido dinámico */
-    .prezi-stage {
-        background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-        padding: 3rem;
-        border-radius: 24px;
-        color: #f8fafc;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        border: 1px solid #334155;
-        margin-top: 1.5rem;
-        margin-bottom: 2rem;
-        animation: preziZoomIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    /* Contenedor principal de la tarjeta con efecto 3D y sombra */
+    .tarjeta-contenedor {
+        background: white;
+        border-radius: 30px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.07);
+        border: 1px solid rgba(255,255,255,0.8);
         position: relative;
         overflow: hidden;
+        animation: entradaTarjeta 0.8s ease-out;
+        margin-top: 20px;
     }
-    
-    /* Efecto decorativo de brillo ambiental */
-    .prezi-stage::before {
+
+    /* Efecto decorativo de confeti flotante en el fondo (usando gradientes) */
+    .tarjeta-contenedor::before {
         content: '';
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
-        pointer-events: none;
+        top: -10px;
+        left: -10px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 20%, transparent 20%),
+                    radial-gradient(circle, rgba(255, 105, 180, 0.4) 20%, transparent 20%),
+                    radial-gradient(circle, rgba(100, 149, 237, 0.4) 20%, transparent 20%);
+        background-size: 20px 20px;
+        opacity: 0.5;
+        z-index: 0;
+    }
+
+    /* Título Principal (Ej. "¡Gracias, Dra. Elisa!") */
+    .titulo-principal {
+        font-family: 'Pacifico', cursive;
+        color: #ff6b6b;
+        font-size: 3.5rem;
+        text-align: center;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 1;
+        animation: aparecerTexto 1s ease-out;
+    }
+
+    /* Subtítulo descriptivo */
+    .subtitulo {
+        color: #555;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin-bottom: 30px;
+        z-index: 1;
+        position: relative;
+        animation: aparecerTexto 1.2s ease-out;
+    }
+
+    /* Segmento de mensaje individual (con animación de deslizamiento) */
+    .mensaje-segmento {
+        background-color: #f8f9fa;
+        border-left: 5px solid #4facfe;
+        color: #333;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        animation: deslizarDerecha 0.5s ease-out both;
     }
     
-    .prezi-title {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #38bdf8;
-        margin-bottom: 1.5rem;
-        border-bottom: 2px solid #334155;
-        padding-bottom: 0.75rem;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        animation: slideDown 0.6s ease-out;
-    }
-    
-    /* Bloques segmentados secuenciales con retraso escalonado (Efecto Prezi de aparición en cadena) */
-    .segment-box {
-        background: rgba(30, 41, 59, 0.7);
-        border-left: 5px solid #38bdf8;
-        padding: 1.25rem 1.5rem;
-        border-radius: 0 16px 16px 0;
-        margin-bottom: 1.25rem;
-        font-size: 1.15rem;
-        color: #e2e8f0;
-        line-height: 1.7;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-        animation: preziSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-    
-    .segment-1 { animation-delay: 0.1s; border-color: #38bdf8; }
-    .segment-2 { animation-delay: 0.3s; border-color: #818cf8; }
-    
-    .prezi-quote {
+    /* Animaciones escalonadas para los segmentos */
+    .seg1 { animation-delay: 0.2s; border-color: #4facfe; }
+    .seg2 { animation-delay: 0.4s; border-color: #00f2fe; }
+    .seg3 { animation-delay: 0.6s; border-color: #43e97b; }
+
+    /* Destacados en el texto (negrita con color) */
+    strong { color: #333; font-weight: 600; }
+
+    /* Frase de cierre inspiradora */
+    .frase-cierre {
+        text-align: center;
         font-style: italic;
-        color: #94a3b8;
-        background: rgba(15, 23, 42, 0.6);
-        border-left: 4px solid #34d399;
-        padding: 1rem 1.25rem;
-        border-radius: 0 12px 12px 0;
-        margin-top: 1.5rem;
-        font-size: 1.05rem;
-        animation: fadeInScale 0.8s ease-out 0.7s both;
+        color: #888;
+        margin-top: 30px;
+        font-size: 1rem;
+        animation: aparecerTexto 1.5s ease-out;
+    }
+
+    /* Iconos decorativos animados */
+    .icono-decorativo {
+        font-size: 3rem;
+        text-align: center;
+        display: block;
+        margin: 0 auto 15px auto;
+        animation: flotar 3s ease-in-out infinite;
+    }
+
+    /* --- DEFINICIÓN DE ANIMACIONES KEYFRAMES --- */
+    @keyframes entradaTarjeta {
+        from { opacity: 0; transform: translateY(50px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes aparecerTexto {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes deslizarDerecha {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
     }
     
-    /* Animaciones fluidas avanzadas */
-    @keyframes preziZoomIn {
-        0% { opacity: 0; transform: scale(0.92) translateY(25px); }
-        100% { opacity: 1; transform: scale(1) translateY(0); }
+    @keyframes flotar {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
     }
-    
-    @keyframes preziSlideUp {
-        0% { opacity: 0; transform: translateY(30px) scale(0.97); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    
-    @keyframes slideDown {
-        0% { opacity: 0; transform: translateY(-15px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes fadeInScale {
-        0% { opacity: 0; transform: scale(0.95); }
-        100% { opacity: 1; transform: scale(1); }
+
+    /* Ajuste para dispositivos móviles para que el menú sea legible */
+    [data-testid="stSidebarNav"] {
+        font-size: 1.1rem;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Menú lateral de navegación interactivo para elegir el mensaje directamente
-st.sidebar.markdown("### 🧭 Menú de Navegación")
-st.sidebar.markdown("Selecciona el espacio de agradecimiento:")
-
-seccion = st.sidebar.radio(
-    "Destinatario:",
+# --- BARRA LATERAL DE NAVEGACIÓN ---
+st.sidebar.markdown("### 👋 Elige a quién agradecer:")
+menu_seleccion = st.sidebar.radio(
+    "Selecciona el destinatario:",
     [
-        "✨ Introducción General",
+        "✨ Introducción",
         "🩺 Dra. Elisa",
         "🔬 Dr. Manuel",
         "💉 Enf. Wendy",
@@ -124,97 +161,126 @@ seccion = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
-# --- 1. INTRODUCCIÓN GENERAL ---
-if seccion == "✨ Introducción General":
+# --- LÓGICA DE VISUALIZACIÓN SEGÚN SELECCIÓN ---
+
+# 1. INTRODUCCIÓN GENERAL
+if menu_seleccion == "✨ Introducción":
     st.markdown("""
-        <div class="prezi-stage" style="text-align: center;">
-            <div class="prezi-title" style="justify-content: center; border: none;">
-                ✨ Reflexiones y Agradecimientos de Rotación ✨
+        <div class="tarjeta-contenedor">
+            <span class="icono-decorativo">🎉</span>
+            <h1 class="titulo-principal" style="font-size: 2.5rem;">¡Gracias por tanto!</h1>
+            <p class="subtitulo">Un pequeño espacio digital para expresar mi gratitud a personas increíbles que hicieron de esta rotación una experiencia inolvidable.</p>
+            <div class="mensaje-segmento seg1" style="text-align: center; border-left: none; background: #f0f2f6;">
+                Durante mi paso por el área de <strong>Epidemiología</strong>, no solo aprendí teoría; me llevé lecciones de vida y mentoría invaluable. Aquí recojo un poco de lo que cada uno me enseñó. Utiliza el menú de la izquierda para leer el mensaje personalizado.
             </div>
-            <div class="segment-box segment-1" style="border-left: none; text-align: center;">
-                Un recorrido interactivo por las mentorías, los aprendizajes y las experiencias clave que marcaron un hito en mi formación como epidemiólogo.
-            </div>
-            <div class="segment-box segment-2" style="border-left: none; text-align: center;">
-                Utiliza el menú lateral para explorar detalladamente el reconocimiento dedicado a cada pilar fundamental de esta etapa.
-            </div>
-            <div class="prezi-quote">
-                "La salud pública no se construye solo con teoría, sino con las manos y el ejemplo de quienes nos enseñan el camino."
-            </div>
+            <p class="frase-cierre">"La educación es el arma más poderosa para cambiar el mundo." - Nelson Mandela</p>
         </div>
     """, unsafe_allow_html=True)
 
-# --- 2. DRA. ELISA ---
-elif seccion == "🩺 Dra. Elisa":
-    st.markdown("""
-        <div class="prezi-stage">
-            <div class="prezi-title">🩺 Dra. Elisa</div>
-            <div class="segment-box segment-1">
-                <strong>Visión y Liderazgo Humano:</strong><br>
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va mucho más allá de números fríos y métricas en un reporte: es saber tomar decisiones con empatía, gestionar la incertidumbre y liderar un equipo con una visión profundamente humana para conseguir metas que realmente transformen la salud de la comunidad.
+# 2. DRA. ELISA
+elif menu_seleccion == "🩺 Dra. Elisa":
+    st.markdown(f"""
+        <div class="tarjeta-contenedor">
+            <span class="icono-decorativo">👩‍⚕️</span>
+            <h1 class="titulo-principal">¡Gracias, Dra. Elisa!</h1>
+            <p class="subtitulo">Por su guía excepcional durante esta rotación</p>
+            
+            <div class="mensaje-segmento seg1">
+                <strong>Más allá de los números:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la Epidemiología va mucho más allá de números fríos y métricas en una base de datos. Me demostró que los datos son solo el inicio para entender la realidad humana y que la disciplina requiere <strong>saber tomar decisiones cruciales</strong> bajo presión.
             </div>
-            <div class="segment-box segment-2">
-                <strong>Pasión por la Prevención:</strong><br>
-                Gracias por impulsarme a pensar de forma estratégica, por cada consejo oportuno y por contagiarme esa pasión inquebrantable por la prevención. Gracias por enseñarme la Medicina Preventiva desde su verdadero sentido y por recordarme que, detrás de cada indicador y cada estadística, siempre hay personas esperando una respuesta.
+            
+            <div class="mensaje-segmento seg2">
+                <strong>Liderazgo y Visión Integral:</strong><br>
+                Aprendí de usted la importancia de <strong>liderar un equipo</strong> con empatía y dirección clara para conseguir metas ambiciosas pero alcanzables en salud pública. Usted no solo gestiona; inspira al equipo a trabajar con un propósito común.
             </div>
-            <div class="prezi-quote">
-                "Liderar con visión humana y transformar los datos en bienestar comunitario."
+            
+            <div class="mensaje-segmento seg3">
+                <strong>La esencia de la prevención:</strong><br>
+                Gracias, de corazón, por enseñarme un poquito de la <strong>Medicina Preventiva</strong> desde su enfoque más humano y efectivo. Me llevo la lección de que anticiparse y educar es la herramienta más poderosa que tenemos. ¡Gracias por ser un modelo a seguir!
             </div>
+            
+            <p class="frase-cierre">"La medicina cura al hombre, la medicina veterinaria cura a la humanidad." - Louis Pasteur</p>
         </div>
     """, unsafe_allow_html=True)
 
-# --- 3. DR. MANUEL ---
-elif seccion == "🔬 Dr. Manuel":
-    st.markdown("""
-        <div class="prezi-stage">
-            <div class="prezi-title">🔬 Dr. Manuel</div>
-            <div class="segment-box segment-1">
-                <strong>Vigilancia Activa en el Terreno:</strong><br>
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver indicadores detrás de un escritorio y exige salir al campo a hacer una verdadera vigilancia activa. Me demostró que lo fundamental es poseer bases sólidas, comprender a fondo el porqué clínico y social de los eventos de salud.
+# 3. DR. MANUEL
+elif menu_seleccion == "🔬 Dr. Manuel":
+    st.markdown(f"""
+        <div class="tarjeta-contenedor">
+            <span class="icono-decorativo">👨‍🏫</span>
+            <h1 class="titulo-principal">¡Gracias, Dr. Manuel!</h1>
+            <p class="subtitulo">Por darme un enfoque distinto y riguroso de la Epidemiología</p>
+            
+            <div class="mensaje-segmento seg1">
+                <strong>Más allá de la supervisión:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la Epidemiología va más allá de ver indicadores de forma superficial y limitarse a hacer supervisiones administrativas. Me enseñó a <strong>hacer una verdadera vigilancia activa</strong>, a estar donde ocurren los eventos y a no dar nada por sentado sin un análisis crítico.
             </div>
-            <div class="segment-box segment-2">
-                <strong>Rigor Científico y Criterio:</strong><br>
-                Gracias por desafiar mi pensamiento analítico, por regalarme un enfoque clínico-epidemiológico completamente distinto y por mostrarme que el rigor científico, unido a la curiosidad constante, son las herramientas más poderosas de un médico especialista más allá de supervisiones burocráticas.
+            
+            <div class="mensaje-segmento seg2">
+                <strong>Entendiendo el porqué:</strong><br>
+                Usted me inculcó la necesidad de tener bases sólidas, de <strong>entender el "porqué"</strong> de las cosas y el mecanismo detrás de cada brote o fenómeno. Me enseñó a analizar la situación con profundidad, a cuestionar los hallazgos y a utilizar la evidencia científica para sustentar cada acción de salud pública.
             </div>
-            <div class="prezi-quote">
-                "Entender el porqué de las cosas para hacer una vigilancia activa y con rigor científico."
+            
+            <div class="mensaje-segmento seg3">
+                <strong>Un enfoque clínico-epidemiológico:</strong><br>
+                Gracias por regalarme un enfoque distinto, donde la clínica se fusiona con la visión poblacional para tomar mejores decisiones. Su mentoría ha sido clave para entender la complejidad de los problemas sanitarios.
             </div>
+            
+            <p class="frase-cierre">"El buen médico trata la enfermedad; el gran médico trata al paciente que tiene la enfermedad." - William Osler</p>
         </div>
     """, unsafe_allow_html=True)
 
-# --- 4. ENF. WENDY ---
-elif seccion == "💉 Enf. Wendy":
-    st.markdown("""
-        <div class="prezi-stage">
-            <div class="prezi-title">💉 Enf. Wendy</div>
-            <div class="segment-box segment-1">
-                <strong>Escenarios y Cuidado Individualizado:</strong><br>
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va más allá de ver las vacunas como simples esquemas fijos que cumplir en un papel. Me enseñó a leer los diferentes escenarios operativos, a individualizar a cada paciente para brindarle una atención de calidad y a dimensionar la compleja red logística que hay detrás de la inmunización.
+# 4. ENF. WENDY
+elif menu_seleccion == "💉 Enf. Wendy":
+    st.markdown(f"""
+        <div class="tarjeta-contenedor">
+            <span class="icono-decorativo">👩‍💉</span>
+            <h1 class="titulo-principal">¡Gracias, Enf. Wendy!</h1>
+            <p class="subtitulo">Por mostrarme el arte detrás de la Vacunología y la Salud Pública</p>
+            
+            <div class="mensaje-segmento seg1">
+                <strong>Vacunas más allá del esquema:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la Epidemiología va más allá de solo ver las vacunas como esquemas fijos a cumplir mecánicamente. Me enseñó a <strong>conocer los diferentes escenarios epidemiológicos</strong> y operativos, y a <strong>individualizar a cada paciente</strong> para brindarle una atención de mayor calidad, asegurando que la protección llegue a quien realmente lo necesita.
             </div>
-            <div class="segment-box segment-2">
-                <strong>Más Allá de la Técnica:</strong><br>
-                Gracias por guiarme desde la gestión detallada de un puesto de vacunación hasta la importancia crítica de cuidar cada parámetro de la red de frío para garantizar la efectividad del biológico. Comprendí que aplicar una vacuna trasciende la técnica mecánica: es un acto sublime de protección comunitaria. ¡Arriba la Salud Pública!
+            
+            <div class="mensaje-segmento seg2">
+                <strong>Gestión y Calidad Total:</strong><br>
+                Gracias por enseñarme desde <strong>cómo se gestiona un puesto de vacunación</strong> de manera eficiente hasta la importancia crítica de tener en cuenta todos los parámetros logísticos. Aprendí que la red de frío, el manejo del biológico y el proceso de registro son fundamentales para que las vacunas lleguen en óptimas condiciones para su correcta aplicación.
             </div>
-            <div class="prezi-quote">
-                "Una vacuna va mucho más allá de una técnica; es el arte de proteger a toda una comunidad."
+            
+            <div class="mensaje-segmento seg3">
+                <strong>Técnica y Vocación:</strong><br>
+                Comprendí que una vacuna va mucho más allá de saber una técnica de inyección; es un acto de responsabilidad, empatía y protección comunitaria. Gracias por ayudarme a entender las vacunas, despertar mi interés genuino en ellas y reafirmar mi pasión por la Salud Pública.
             </div>
+            
+            <p class="frase-cierre">¡Arriba la Salud Pública! 💖</p>
         </div>
     """, unsafe_allow_html=True)
 
-# --- 5. LIC. BERE ---
-elif seccion == "📋 Lic. Bere":
-    st.markdown("""
-        <div class="prezi-stage">
-            <div class="prezi-title">📋 Lic. Bere</div>
-            <div class="segment-box segment-1">
-                <strong>Población Clave y Gestión Operativa:</strong><br>
-                Gracias por esta rotación. Usted me enseñó que la epidemiología va mucho más allá de administrar insumos o cumplir con trámites administrativos; es conocer a profundidad a la población clave para aterrizar estrategias efectivas y alinear los lineamientos vigentes a la realidad operativa.
+# 5. LIC. BERE
+elif menu_seleccion == "📋 Lic. Bere":
+    st.markdown(f"""
+        <div class="tarjeta-contenedor">
+            <span class="icono-decorativo">👩‍💼</span>
+            <h1 class="titulo-principal">¡Gracias, Lic. Bere!</h1>
+            <p class="subtitulo">Por enseñarme la importancia vital de la Gestión y la Administración en Salud</p>
+            
+            <div class="mensaje-segmento seg1">
+                <strong>Administración con sentido social:</strong><br>
+                Gracias por esta rotación. Usted me enseñó que la Epidemiología va mucho más allá que solo administrar insumos y llevar un control de inventarios. Me demostró que la administración eficaz es la base para conocer a la <strong>población clave</strong> y así aplicar estrategias o lineamientos vigentes de manera efectiva y oportuna.
             </div>
-            <div class="segment-box segment-2">
-                <strong>Apertura, Soluciones y Curiosidad:</strong><br>
-                Admiro enormemente su apertura al conocimiento, su disposición para enseñar sin reservas y su capacidad para no limitarse ante los obstáculos, encontrando siempre soluciones prácticas. Me demostró que la curiosidad es una virtud y que ante la duda, preguntar siempre abre la puerta al crecimiento. Gracias por enseñarme que la gestión en salud es el motor invisible que sostiene todo lo demás.
+            
+            <div class="mensaje-segmento seg2">
+                <strong>Apertura y Soluciones:</strong><br>
+                Admiro profundamente su <strong>apertura al conocimiento</strong> y su disposición para compartirlo. Me siento orgulloso de encontrar personas como usted, que no se limitan a un manual, que conocen su campo a profundidad y que siempre <strong>implementan soluciones</strong> prácticas para superar los desafíos diarios.
             </div>
-            <div class="prezi-quote">
-                "La administración va más allá de la gestión: es conocer a la población y transformar los recursos en soluciones."
+            
+            <div class="mensaje-segmento seg3">
+                <strong>El valor de preguntar:</strong><br>
+                Gracias por recordarme que, ante la duda, <strong>es mejor preguntar</strong> y buscar la respuesta correcta que asumir. Usted me enseñó que la administración en salud va mucho más allá de la simple organización y gestión de recursos: es el motor que permite que las estrategias de salud pública funcionen.
             </div>
+            
+            <p class="frase-cierre">"La gestión es hacer las cosas bien; el liderazgo es hacer las cosas correctas." - Peter Drucker</p>
         </div>
     """, unsafe_allow_html=True)
