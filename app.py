@@ -2,79 +2,96 @@ import streamlit as st
 
 # Configuración de la página
 st.set_page_config(
-    page_title="Agradecimientos de Rotación | Epidemiología",
-    page_icon="🩺",
+    page_title="Para mi equipo de rotación | Epidemiología",
+    page_icon="💖",
     layout="centered"
 )
 
-# Estilos CSS personalizados para el diseño moderno, tarjetas y botones limpios
+# Estilos CSS avanzados inspirados en tarjetas románticas interactivas con corazones flotantes
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
     
-    .prezi-card {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    /* Fondo general con un toque sutil y elegante */
+    .stApp {
+        background: linear-gradient(135deg, #0f172a 1e293b 0%, #1e1b4b 100%);
+        background-color: #0f172a;
+    }
+    
+    /* Contenedor principal estilo tarjeta digital romántica */
+    .tarjeta-romantica {
+        background: rgba(30, 41, 59, 0.85);
+        backdrop-filter: blur(10px);
         padding: 2.5rem;
-        border-radius: 20px;
+        border-radius: 24px;
         color: #f8fafc;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-        border: 1px solid #334155;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 63, 94, 0.2);
+        border: 1px solid rgba(244, 63, 94, 0.3);
         margin-top: 1rem;
         margin-bottom: 2rem;
-        animation: fadeIn 0.6s ease-in-out;
+        animation: fadeInCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     
-    .prezi-title {
-        font-size: 1.8rem;
+    .titulo-tarjeta {
+        font-size: 2rem;
         font-weight: 700;
-        color: #38bdf8;
-        margin-bottom: 1.2rem;
-        border-bottom: 2px solid #334155;
+        color: #fb7185;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid rgba(244, 63, 94, 0.3);
         padding-bottom: 0.5rem;
+        text-align: center;
     }
     
     .mensaje-segmento {
-        background: rgba(51, 65, 85, 0.4);
-        padding: 1.1rem 1.3rem;
-        border-radius: 12px;
-        margin-bottom: 1rem;
-        border-left: 4px solid #38bdf8;
+        background: rgba(15, 23, 42, 0.6);
+        padding: 1.2rem 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 1.2rem;
+        border-left: 5px solid #fb7185;
         font-size: 1.05rem;
-        line-height: 1.6;
+        line-height: 1.7;
         color: #cbd5e1;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        animation: slideUp 0.6s ease-out both;
     }
     
     .mensaje-segmento strong {
-        color: #f8fafc;
+        color: #fff1f2;
     }
     
     .frase-cierre {
         font-style: italic;
-        color: #94a3b8;
+        color: #fda4af;
         text-align: center;
         margin-top: 1.5rem;
-        font-size: 0.95rem;
-        border-top: 1px dashed #334155;
+        font-size: 1rem;
+        border-top: 1px dashed rgba(244, 63, 94, 0.3);
         padding-top: 1rem;
     }
     
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(15px) scale(0.98); }
+    @keyframes fadeInCard {
+        from { opacity: 0; transform: translateY(20px) scale(0.97); }
         to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Control de estados para saber qué sección/persona se está visualizando
+# Control de estados para la navegación
 if 'seccion' not in st.session_state:
     st.session_state.seccion = 'inicio'
 
-# --- MENÚ DE BOTONES PRINCIPAL EN LA INTERFAZ ---
-st.markdown("### 👋 Elige a quién agradecer:")
+# --- MENÚ DE BOTONES PRINCIPAL ---
+st.markdown("<h3 style='text-align: center; color: #f43f5e;'>✨ Dedicatorias de Rotación ✨</h3>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.95rem;'>Selecciona un destinatario para abrir su tarjeta:</p>", unsafe_allow_html=True)
 
 col_btn1, col_btn2, col_btn3, col_btn4 = st.columns(4)
 
@@ -91,25 +108,27 @@ with col_btn4:
     if st.button("📋 Lic. Bere", use_container_width=True):
         st.session_state.seccion = 'bere'
 
-st.write("---")
+st.write("")
 
 # --- VISTA DE INICIO ---
 if st.session_state.seccion == 'inicio':
     st.markdown("""
-        <div class="prezi-card" style="text-align: center;">
-            <div class="prezi-title" style="border: none;">✨ Reflexiones y Agradecimientos de Rotación ✨</div>
+        <div class="tarjeta-romantica" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">💖</div>
+            <div class="titulo-tarjeta" style="border: none; justify-content: center;">Agradecimientos con Estilo</div>
             <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.6;">
-                Selecciona cualquiera de los botones superiores para descubrir los mensajes y reconocimientos especiales preparados para cada integrante del equipo.
+                Un espacio interactivo diseñado con mucho cariño para reconocer el gran liderazgo, la guía y los aprendizajes que me llevé de cada uno de ustedes en esta etapa de especialidad.
             </p>
+            <p style="color: #fb7185; margin-top: 20px; font-weight: 600;">Haz clic arriba en los botones para comenzar 👆</p>
         </div>
     """, unsafe_allow_html=True)
 
 # --- VISTA: DRA. ELISA ---
 elif st.session_state.seccion == 'elisa':
     st.markdown("""
-        <div class="prezi-card">
-            <div class="prezi-title">👩‍⚕️ ¡Gracias, Dra. Elisa!</div>
-            <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">👩‍⚕️ Dra. Elisa</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
                 <strong>Visión y Liderazgo Humano:</strong><br>
@@ -135,9 +154,9 @@ elif st.session_state.seccion == 'elisa':
 # --- VISTA: DR. MANUEL ---
 elif st.session_state.seccion == 'manuel':
     st.markdown("""
-        <div class="prezi-card">
-            <div class="prezi-title">🔬 ¡Gracias, Dr. Manuel!</div>
-            <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">🔬 Dr. Manuel</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
                 <strong>Vigilancia Activa en el Terreno:</strong><br>
@@ -163,9 +182,9 @@ elif st.session_state.seccion == 'manuel':
 # --- VISTA: ENF. WENDY ---
 elif st.session_state.seccion == 'wendy':
     st.markdown("""
-        <div class="prezi-card">
-            <div class="prezi-title">💉 ¡Gracias, Enf. Wendy!</div>
-            <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">💉 Enf. Wendy</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
                 <strong>Escenarios y Cuidado Individualizado:</strong><br>
@@ -191,9 +210,9 @@ elif st.session_state.seccion == 'wendy':
 # --- VISTA: LIC. BERE ---
 elif st.session_state.seccion == 'bere':
     st.markdown("""
-        <div class="prezi-card">
-            <div class="prezi-title">📋 ¡Gracias, Lic. Bere!</div>
-            <p style="color: #38bdf8; font-weight: 600; margin-bottom: 1.2rem;">Por su guía excepcional durante esta rotación</p>
+        <div class="tarjeta-romantica">
+            <div class="titulo-tarjeta">📋 Lic. Bere</div>
+            <p style="color: #fb7185; font-weight: 600; margin-bottom: 1.2rem; text-align: center;">Por su guía excepcional durante esta rotación</p>
             
             <div class="mensaje-segmento">
                 <strong>Población Clave y Gestión Operativa:</strong><br>
